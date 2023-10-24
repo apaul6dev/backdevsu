@@ -8,4 +8,5 @@ public interface CuentaService {
     CuentaDTO update(CuentaDTO objDTO);
     CuentaDTO findById(Integer id);
     void delete(Integer id);
+
 }

@@ -27,4 +27,6 @@ public class MovimientoDTO {
     private Double valor;
     @Parsed
     private Double saldo;
+
+    private CuentaDTO cuenta;
 }

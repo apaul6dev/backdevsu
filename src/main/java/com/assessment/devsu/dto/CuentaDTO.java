@@ -8,11 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 @Getter
 @Setter
 @Builder
@@ -30,4 +25,6 @@ public class CuentaDTO {
     private Double saldoInicial;
     @Parsed
     private Integer estado;
+
+    private ClienteDTO cliente;
 }

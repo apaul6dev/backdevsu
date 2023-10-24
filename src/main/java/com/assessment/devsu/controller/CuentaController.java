@@ -8,13 +8,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/cuentas")
 public class CuentaController {
-
-    private CuentaService cuentaService;
-
     @Autowired
-    public CuentaController(CuentaService cuentaService) {
-        this.cuentaService = cuentaService;
-    }
+    private CuentaService cuentaService;
 
     @GetMapping("/{id}")
     public CuentaDTO getCuentaById(@PathVariable("id") int idCuenta) {

@@ -28,4 +28,8 @@ public class Cuenta {
     @Column(name = "estado", nullable = true)
     private Integer estado;
 
+    @ManyToOne
+    @JoinColumn(name = "id_cliente", nullable = false)
+    private Cliente cliente;
+
 }

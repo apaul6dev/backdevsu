@@ -8,11 +8,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
-    private ClienteService clienteService;
     @Autowired
-    public ClienteController(ClienteService clienteService) {
-        this.clienteService = clienteService;
-    }
+    private ClienteService clienteService;
 
     @GetMapping("/{id}")
     public ClienteDTO getClienteById(@PathVariable("id") int idCliente) {

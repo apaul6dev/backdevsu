@@ -11,15 +11,12 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class ClienteDTO extends PersonaDTO{
 
-    @Parsed
     private String contrasena;
-    @Parsed
-    private Integer estado;
+    private String estado;
 
 }

@@ -8,12 +8,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/movimientos")
 public class MovimientoController {
-
-    private MovimientoService movimientoService;
     @Autowired
-    public MovimientoController(MovimientoService movimientoService) {
-        this.movimientoService = movimientoService;
-    }
+    private MovimientoService movimientoService;
 
     @GetMapping("/{id}")
     public MovimientoDTO getMovimientoById(@PathVariable("id") int idMovimiento) {
