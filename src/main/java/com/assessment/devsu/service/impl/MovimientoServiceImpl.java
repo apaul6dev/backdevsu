@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MovimientoServiceImpl implements MovimientoService {
@@ -75,6 +76,13 @@ public class MovimientoServiceImpl implements MovimientoService {
     public MovimientoDTO findById(int id) {
         Movimiento movimiento = findObjectById(id);
         return modelMapper.map(movimiento, MovimientoDTO.class);
+    }
+
+    @Override
+    public List<MovimientoDTO> getAllByCuenta(int idCuenta) {
+        List<Movimiento> monsters = repository.findAll();
+        return monsters.stream().map(movimiento -> modelMapper.map(movimiento, MovimientoDTO.class))
+                .collect(Collectors.toList());
     }
 
     @Override

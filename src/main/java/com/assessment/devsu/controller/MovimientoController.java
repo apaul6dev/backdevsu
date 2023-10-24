@@ -7,6 +7,8 @@ import com.assessment.devsu.service.MovimientoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/movimientos")
 public class MovimientoController {
@@ -22,9 +24,15 @@ public class MovimientoController {
 
     @PostMapping
     public MovimientoDTO create(@RequestBody MovimientoDTO movimientoDTO) {
-        CuentaDTO cuentaDTO =  cuentaService.findById(movimientoDTO.getCuenta().getIdCuenta());;
+        CuentaDTO cuentaDTO = cuentaService.findById(movimientoDTO.getCuenta().getIdCuenta());
         movimientoDTO.setCuenta(cuentaDTO);
         return movimientoService.create(movimientoDTO);
+    }
+
+    @GetMapping("getAllByCuenta/{id}")
+    public List<MovimientoDTO> getAllByCuenta(@PathVariable("id") int idCuenta) {
+        cuentaService.findById(idCuenta);
+        return movimientoService.getAllByCuenta(idCuenta);
     }
 
     @PutMapping
