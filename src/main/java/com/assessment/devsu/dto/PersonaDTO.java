@@ -11,7 +11,7 @@ import lombok.*;
 @ToString
 public class PersonaDTO {
 
-    private Integer idPersona;
+    private int idPersona;
     @Parsed
     private String nombre;
     @Parsed

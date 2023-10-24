@@ -16,15 +16,15 @@ import lombok.ToString;
 @ToString
 public class CuentaDTO {
 
-    private Integer idCuenta;
-    @Parsed
+    private int idCuenta;
+
     private Integer numeroCuenta;
-    @Parsed
+
     private String tipoCuenta;
-    @Parsed
+
     private Double saldoInicial;
-    @Parsed
-    private Integer estado;
+
+    private String estado;
 
     private ClienteDTO cliente;
 }

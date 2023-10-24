@@ -7,7 +7,7 @@ public interface ClienteService {
 
     ClienteDTO create(ClienteDTO objDTO);
     ClienteDTO update(ClienteDTO objDTO);
-    ClienteDTO findById(Integer id);
-    void delete(Integer id);
+    ClienteDTO findById(int id);
+    void delete(int id);
 
 }

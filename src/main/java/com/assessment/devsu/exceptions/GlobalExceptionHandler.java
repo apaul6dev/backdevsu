@@ -25,6 +25,12 @@ public class GlobalExceptionHandler {
         return new ErrorDetails(ex.getMessage(), request.getDescription(false));
     }
 
+    @ExceptionHandler(value = {UnprocessableMovimiento.class})
+    @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
+    public ErrorDetails unprocessedMovimiento(UnprocessableMovimiento ex, WebRequest request) {
+        return new ErrorDetails(ex.getMessage(), request.getDescription(false));
+    }
+
     @ExceptionHandler(value = {UnprocessableFileException.class})
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorDetails unprocessedFileException(UnprocessableFileException ex, WebRequest request) {

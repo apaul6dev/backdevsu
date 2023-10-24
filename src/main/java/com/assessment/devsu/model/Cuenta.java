@@ -26,7 +26,7 @@ public class Cuenta {
     private Double saldoInicial;
 
     @Column(name = "estado", nullable = true)
-    private Integer estado;
+    private String estado;
 
     @ManyToOne
     @JoinColumn(name = "id_cliente", nullable = false)

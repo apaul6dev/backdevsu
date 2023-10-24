@@ -18,15 +18,11 @@ import java.util.Date;
 @ToString
 public class MovimientoDTO {
 
-    private Integer idMovimiento;
-    @Parsed
+    private int idMovimiento;
     private Date fecha;
-    @Parsed
     private String tipo;
-    @Parsed
     private Double valor;
-    @Parsed
     private Double saldo;
-
     private CuentaDTO cuenta;
+
 }

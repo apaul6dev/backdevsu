@@ -37,13 +37,13 @@ public class CuentaServiceImpl implements CuentaService {
     }
 
     @Override
-    public CuentaDTO findById(Integer id) {
+    public CuentaDTO findById(int id) {
         Cuenta cuenta = findObjectById(id);
         return modelMapper.map(cuenta, CuentaDTO.class);
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(int id) {
         Cuenta cuenta = findObjectById(id);
         repository.delete(cuenta);
     }

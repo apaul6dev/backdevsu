@@ -39,13 +39,13 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public ClienteDTO findById(Integer id) {
+    public ClienteDTO findById(int id) {
         Cliente cliente = findObjectById(id);
         return modelMapper.map(cliente, ClienteDTO.class);
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(int id) {
         Cliente cliente = findObjectById(id);
         repository.delete(cliente);
     }

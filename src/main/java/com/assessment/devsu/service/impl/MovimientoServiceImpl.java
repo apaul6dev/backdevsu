@@ -1,13 +1,18 @@
 package com.assessment.devsu.service.impl;
+
 import com.assessment.devsu.dto.MovimientoDTO;
 import com.assessment.devsu.exceptions.ResourceNotFoundException;
+import com.assessment.devsu.exceptions.UnprocessableMovimiento;
 import com.assessment.devsu.model.Movimiento;
 import com.assessment.devsu.repository.MovimientoRepository;
 import com.assessment.devsu.service.MovimientoService;
+import com.assessment.devsu.util.MovimientoStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import org.modelmapper.ModelMapper;
+
+import java.util.List;
 
 @Service
 public class MovimientoServiceImpl implements MovimientoService {
@@ -23,9 +28,30 @@ public class MovimientoServiceImpl implements MovimientoService {
 
     @Override
     public MovimientoDTO create(MovimientoDTO objDTO) {
+
         Movimiento movimiento = modelMapper.map(objDTO, Movimiento.class);
+        Movimiento lastMovimiento = getLastMovimiento(movimiento.getCuenta().getIdCuenta());
+        Double saldoTmp = null;
+
+        if (lastMovimiento != null) {
+            saldoTmp = lastMovimiento.getSaldo();
+        } else {
+            saldoTmp = movimiento.getCuenta().getSaldoInicial();
+        }
+
+        if (objDTO.getTipo().equals("deposito")) {
+            movimiento.setSaldo(saldoTmp + movimiento.getValor());
+        } else if (objDTO.getTipo().equals("retiro")) {
+            Double debito = saldoTmp - movimiento.getValor();
+            if (debito < 0) {
+                throw new UnprocessableMovimiento(MovimientoStatus.SALDO_NO_DISPONIBLE.getStatus());
+            }
+            movimiento.setSaldo(debito);
+        }
+
         movimiento = repository.save(movimiento);
         return modelMapper.map(movimiento, MovimientoDTO.class);
+
     }
 
     @Override
@@ -36,14 +62,23 @@ public class MovimientoServiceImpl implements MovimientoService {
         return modelMapper.map(movimiento, MovimientoDTO.class);
     }
 
+
+    private Movimiento getLastMovimiento(int idCuenta) {
+        return repository.getLastMovimiento(idCuenta);
+    }
+
+    private List<Movimiento> getAllMovimientos(int idCuenta) {
+        return repository.getAll(idCuenta);
+    }
+
     @Override
-    public MovimientoDTO findById(Integer id) {
+    public MovimientoDTO findById(int id) {
         Movimiento movimiento = findObjectById(id);
         return modelMapper.map(movimiento, MovimientoDTO.class);
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(int id) {
         Movimiento movimiento = findObjectById(id);
         repository.delete(movimiento);
     }

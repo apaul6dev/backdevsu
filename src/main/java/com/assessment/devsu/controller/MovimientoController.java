@@ -1,6 +1,8 @@
 package com.assessment.devsu.controller;
 
+import com.assessment.devsu.dto.CuentaDTO;
 import com.assessment.devsu.dto.MovimientoDTO;
+import com.assessment.devsu.service.CuentaService;
 import com.assessment.devsu.service.MovimientoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 public class MovimientoController {
     @Autowired
     private MovimientoService movimientoService;
+    @Autowired
+    private CuentaService cuentaService;
 
     @GetMapping("/{id}")
     public MovimientoDTO getMovimientoById(@PathVariable("id") int idMovimiento) {
@@ -18,6 +22,8 @@ public class MovimientoController {
 
     @PostMapping
     public MovimientoDTO create(@RequestBody MovimientoDTO movimientoDTO) {
+        CuentaDTO cuentaDTO =  cuentaService.findById(movimientoDTO.getCuenta().getIdCuenta());;
+        movimientoDTO.setCuenta(cuentaDTO);
         return movimientoService.create(movimientoDTO);
     }
 

@@ -6,7 +6,7 @@ public interface MovimientoService {
 
     MovimientoDTO create(MovimientoDTO objDTO);
     MovimientoDTO update(MovimientoDTO objDTO);
-    MovimientoDTO findById(Integer id);
-    void delete(Integer battleId);
+    MovimientoDTO findById(int id);
+    void delete(int id);
 
 }

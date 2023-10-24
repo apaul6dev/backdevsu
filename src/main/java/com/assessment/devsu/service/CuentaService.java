@@ -6,7 +6,7 @@ public interface CuentaService {
 
     CuentaDTO create(CuentaDTO objDTO);
     CuentaDTO update(CuentaDTO objDTO);
-    CuentaDTO findById(Integer id);
-    void delete(Integer id);
+    CuentaDTO findById(int id);
+    void delete(int id);
 
 }
