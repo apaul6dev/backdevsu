@@ -1,13 +1,18 @@
 package com.assessment.devsu.service.impl;
 
+import com.assessment.devsu.dto.ClienteDTO;
 import com.assessment.devsu.dto.CuentaDTO;
 import com.assessment.devsu.exceptions.ResourceNotFoundException;
+import com.assessment.devsu.model.Cliente;
 import com.assessment.devsu.model.Cuenta;
 import com.assessment.devsu.repository.CuentaRepository;
 import com.assessment.devsu.service.CuentaService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CuentaServiceImpl implements CuentaService {
@@ -46,6 +51,13 @@ public class CuentaServiceImpl implements CuentaService {
     public void delete(int id) {
         Cuenta cuenta = findObjectById(id);
         repository.delete(cuenta);
+    }
+
+    @Override
+    public List<CuentaDTO> getAll() {
+        List<Cuenta> cuentas = repository.findAll();
+        return cuentas.stream().map(cuenta -> modelMapper.map(cuenta, CuentaDTO.class))
+                .collect(Collectors.toList());
     }
 
     private Cuenta findObjectById(int id) {

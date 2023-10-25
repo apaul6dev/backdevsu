@@ -11,6 +11,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ClienteServiceImpl implements ClienteService {
 
@@ -48,6 +51,13 @@ public class ClienteServiceImpl implements ClienteService {
     public void delete(int id) {
         Cliente cliente = findObjectById(id);
         repository.delete(cliente);
+    }
+
+    @Override
+    public List<ClienteDTO> getAll() {
+        List<Cliente> clientes = repository.findAll();
+        return clientes.stream().map(cliente -> modelMapper.map(cliente, ClienteDTO.class))
+                .collect(Collectors.toList());
     }
 
     private Cliente findObjectById(int id) {

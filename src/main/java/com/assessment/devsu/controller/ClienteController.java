@@ -5,6 +5,8 @@ import com.assessment.devsu.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
@@ -31,5 +33,8 @@ public class ClienteController {
         clienteService.delete(idCliente);
     }
 
-
+    @GetMapping
+    public List<ClienteDTO> getAll() {
+        return clienteService.getAll();
+    }
 }

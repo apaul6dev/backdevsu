@@ -5,6 +5,8 @@ import com.assessment.devsu.service.CuentaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/cuentas")
 public class CuentaController {
@@ -29,5 +31,10 @@ public class CuentaController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") int idCuenta) {
         cuentaService.delete(idCuenta);
+    }
+
+    @GetMapping
+    public List<CuentaDTO> getAll() {
+        return cuentaService.getAll();
     }
 }
