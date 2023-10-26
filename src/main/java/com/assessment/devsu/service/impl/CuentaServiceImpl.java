@@ -3,6 +3,7 @@ package com.assessment.devsu.service.impl;
 import com.assessment.devsu.dto.ClienteDTO;
 import com.assessment.devsu.dto.CuentaDTO;
 import com.assessment.devsu.exceptions.ResourceNotFoundException;
+import com.assessment.devsu.exceptions.UnprocessableEntityException;
 import com.assessment.devsu.model.Cliente;
 import com.assessment.devsu.model.Cuenta;
 import com.assessment.devsu.repository.CuentaRepository;
@@ -49,8 +50,13 @@ public class CuentaServiceImpl implements CuentaService {
 
     @Override
     public void delete(int id) {
-        Cuenta cuenta = findObjectById(id);
-        repository.delete(cuenta);
+        try{
+            Cuenta cuenta = findObjectById(id);
+            repository.delete(cuenta);
+        }catch (Exception e){
+            throw new UnprocessableEntityException("Para eliminar una cuenta, no debe tener movimientos!");
+        }
+
     }
 
     @Override

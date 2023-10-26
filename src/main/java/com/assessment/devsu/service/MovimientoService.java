@@ -1,6 +1,8 @@
 package com.assessment.devsu.service;
 
 import com.assessment.devsu.dto.MovimientoDTO;
+import com.assessment.devsu.dto.ReporteDTO;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.util.List;
 
@@ -11,5 +13,8 @@ public interface MovimientoService {
     MovimientoDTO findById(int id);
     List<MovimientoDTO> getAllByCuenta(int idCuenta);
     void delete(int id);
+
+    List<ReporteDTO>reporteJSON(String finicial, String ffinal);
+    String reportePDF(String finicial, String ffinal) throws JsonProcessingException;
 
 }

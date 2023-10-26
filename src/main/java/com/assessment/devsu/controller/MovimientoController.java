@@ -2,9 +2,12 @@ package com.assessment.devsu.controller;
 
 import com.assessment.devsu.dto.CuentaDTO;
 import com.assessment.devsu.dto.MovimientoDTO;
+import com.assessment.devsu.dto.ReporteDTO;
 import com.assessment.devsu.service.CuentaService;
 import com.assessment.devsu.service.MovimientoService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,5 +46,17 @@ public class MovimientoController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") int idMovimiento) {
         movimientoService.delete(idMovimiento);
+    }
+
+    @GetMapping("/generateJSONReport")
+    public List<ReporteDTO> generateJSONReport(@RequestParam("finicial") String finicial, @RequestParam("ffinal") String ffinal) {
+        return movimientoService.reporteJSON(finicial, ffinal);
+    }
+
+    @GetMapping("/generatePDFReport")
+    public String generatePDFReport(@RequestParam("finicial") String finicial, @RequestParam("ffinal") String ffinal) throws JsonProcessingException {
+        String result = "{\"base\":\"data\"}";
+        String data = result.replace("data", movimientoService.reportePDF(finicial, ffinal));
+        return data;
     }
 }
