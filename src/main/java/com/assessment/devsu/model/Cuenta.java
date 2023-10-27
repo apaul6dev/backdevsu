@@ -16,16 +16,16 @@ public class Cuenta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCuenta;
 
-    @Column(name = "numero_cuenta", nullable = true)
+    @Column(name = "numero_cuenta", nullable = false, unique = true)
     private Integer numeroCuenta;
 
-    @Column(name = "tipo_cuenta", nullable = true)
+    @Column(name = "tipo_cuenta", nullable = false)
     private String tipoCuenta;
 
-    @Column(name = "saldo_inicial", nullable = true)
+    @Column(name = "saldo_inicial", nullable = false)
     private Double saldoInicial;
 
-    @Column(name = "estado", nullable = true)
+    @Column(name = "estado", nullable = false)
     private String estado;
 
     @ManyToOne

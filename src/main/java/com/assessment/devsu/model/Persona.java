@@ -23,19 +23,19 @@ public class Persona {
     @Column(name = "id_persona")
     private Integer idPersona;
 
-    @Column(name = "nombre", nullable = true)
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Column(name = "genero" , nullable = true)
+    @Column(name = "genero" , nullable = false)
     private String genero;
 
-    @Column(name = "edad", nullable = true)
+    @Column(name = "edad", nullable = false)
     private Integer edad;
 
-    @Column(name = "identificacion", nullable = true)
+    @Column(name = "identificacion", nullable = true,  unique = true)
     private String identificacion;
 
-    @Column(name = "direccion", nullable = true)
+    @Column(name = "direccion", nullable = false)
     private String direccion;
 
     @Column(name = "telefono", nullable = true)

@@ -16,7 +16,7 @@ public class Cliente extends Persona {
     @Column(name = "contrasena", nullable = false)
     private String contrasena;
 
-    @Column(name = "estado", nullable = true)
+    @Column(name = "estado", nullable = false)
     private String estado;
 
 }
