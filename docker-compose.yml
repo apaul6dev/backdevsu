@@ -1,15 +1,24 @@
 version: "3.8"
+
 services:
-  postgres:
+  postgres-standalone:
     image: postgres:15.1
-    container_name: postgres15-container
+    container_name: postgres-standalone
     restart: always
     ports:
       - 5432:5432
     environment:
-      - DATABASE_HOST=127.0.0.1
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=admin
-      - POSTGRES_DB=devsudb
-    volumes:
-      - /Users/apaulg/Documents/volumenes/postgres15:/var/lib/postgres/data:rw
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: devsudb
+
+  springboot-docker-container:
+    image: springboot-docker-container
+    container_name: springboot-docker-container
+    ports:
+      - 9091:9091
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres-standalone
