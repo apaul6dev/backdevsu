@@ -14,7 +14,7 @@ public interface MovimientoService {
     List<MovimientoDTO> getAllByCuenta(int idCuenta);
     void delete(int id);
 
-    List<ReporteDTO>reporteJSON(String finicial, String ffinal);
-    String reportePDF(String finicial, String ffinal) throws JsonProcessingException;
+    List<ReporteDTO>reporteJSON(String finicial, String ffinal, int idCuenta);
+    String reportePDF(String finicial, String ffinal, int idCuenta) throws JsonProcessingException;
 
 }

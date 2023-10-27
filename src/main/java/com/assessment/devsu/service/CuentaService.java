@@ -11,6 +11,6 @@ public interface CuentaService {
     CuentaDTO update(CuentaDTO objDTO);
     CuentaDTO findById(int id);
     void delete(int id);
-
+    List<CuentaDTO> getCuentasByCliente(int idCLiente);
     List<CuentaDTO> getAll();
 }

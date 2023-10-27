@@ -37,4 +37,8 @@ public class CuentaController {
     public List<CuentaDTO> getAll() {
         return cuentaService.getAll();
     }
+    @GetMapping("getCuentasByCliente/{id}")
+    public List<CuentaDTO> getCuentasByCliente(@PathVariable("id") int idCliente) {
+        return cuentaService.getCuentasByCliente(idCliente);
+    }
 }

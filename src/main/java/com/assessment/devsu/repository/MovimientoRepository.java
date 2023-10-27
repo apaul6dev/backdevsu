@@ -24,34 +24,28 @@ public interface MovimientoRepository extends JpaRepository<Movimiento, Integer>
             "ORDER BY fecha DESC ", nativeQuery = true)
     List<Movimiento> getAll(@Param("idCuenta") Integer idCuenta);
 
-    @Query(value="select\n" +
-            "\tto_char(m.fecha,'DD/MM/YYYY') as fecha,\n" +
-            "\tp.nombre as cliente,\n" +
-            "\tc.numero_cuenta numerocuenta,\n" +
-            "\t\tcase\n" +
-            "\t\twhen m.tipo = 'retiro' then m.saldo + m.valor\n" +
-            "\t\telse m.saldo - m.valor\n" +
-            "\tend as saldoinicial,\n" +
-            "\tc.tipo_cuenta as tipocuenta,\n" +
-            "\tc.estado,\n" +
-            "\tm.valor as movimiento,\n" +
-            "\tm.saldo as saldodiponible\n" +
-            "from\n" +
-            "\tmovimiento m,\n" +
-            "\tcuenta c,\n" +
-            "\tcliente te,\n" +
-            "\tpersona p\n" +
+    @Query(value="select " +
+                "to_char(m.fecha,'DD/MM/YYYY') as fecha, " +
+                "p.nombre as cliente, " +
+                "c.numero_cuenta numerocuenta, " +
+                "    case " +
+                "    when m.tipo = 'retiro' then m.saldo + m.valor " +
+                "    else m.saldo - m.valor " +
+                " end as saldoinicial, " +
+                " c.tipo_cuenta as tipocuenta, " +
+                " c.estado, " +
+                " m.valor as movimiento, " +
+                " m.saldo as saldodiponible " +
+            "from " +
+                " movimiento m, cuenta c, cliente te, persona p " +
             "where " +
-            " m.id_cuenta = c.id_cuenta " +
-            " and c.id_cliente = te.id_cliente " +
-            " and te.id_cliente = p.id_persona " +
-            " and to_char(m.fecha,'DD/MM/YYYY') between :finicial and :ffinal " +
-            "order by " +
-            " p.nombre, " +
-            " c.numero_cuenta, " +
-            " m.tipo, " +
-            " m.fecha ", nativeQuery = true)
-    List<Object[]> reporte(@Param("finicial") String finicial, @Param("ffinal") String ffinal);
+                " m.id_cuenta = c.id_cuenta " +
+                " and c.id_cliente = te.id_cliente " +
+                " and te.id_cliente = p.id_persona " +
+                " and to_char(m.fecha,'DD/MM/YYYY') between :finicial and :ffinal " +
+                " and c.numero_cuenta = :idCuenta "+
+            "order by p.nombre, c.numero_cuenta, m.tipo, m.fecha ", nativeQuery = true)
+    List<Object[]> reporte(@Param("finicial") String finicial, @Param("ffinal") String ffinal, @Param("idCuenta") int idCuenta);
 
 
 }

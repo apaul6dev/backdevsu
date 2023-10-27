@@ -96,9 +96,9 @@ public class MovimientoServiceImpl implements MovimientoService {
     }
 
     @Override
-    public List<ReporteDTO> reporteJSON(String finicial, String ffinal) {
+    public List<ReporteDTO> reporteJSON(String finicial, String ffinal, int idCuenta) {
         List<ReporteDTO> movimientos = new ArrayList<>();
-        repository.reporte(finicial, ffinal).forEach(x -> {
+        repository.reporte(finicial, ffinal, idCuenta).forEach(x -> {
             ReporteDTO m = new ReporteDTO();
             m.setFecha(String.valueOf(x[0]));
             m.setCliente(String.valueOf(x[1]));
@@ -114,8 +114,8 @@ public class MovimientoServiceImpl implements MovimientoService {
     }
 
     @Override
-    public String reportePDF(String finicial, String ffinal) throws JsonProcessingException {
-        List<ReporteDTO> reporteList = reporteJSON(finicial, ffinal);
+    public String reportePDF(String finicial, String ffinal, int idCuenta) throws JsonProcessingException {
+        List<ReporteDTO> reporteList = reporteJSON(finicial, ffinal, idCuenta);
         ObjectMapper objectMapper = new ObjectMapper();
 
         String json = objectMapper.writeValueAsString(reporteList);

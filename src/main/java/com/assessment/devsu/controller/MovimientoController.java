@@ -49,14 +49,14 @@ public class MovimientoController {
     }
 
     @GetMapping("/generateJSONReport")
-    public List<ReporteDTO> generateJSONReport(@RequestParam("finicial") String finicial, @RequestParam("ffinal") String ffinal) {
-        return movimientoService.reporteJSON(finicial, ffinal);
+    public List<ReporteDTO> generateJSONReport(@RequestParam("finicial") String finicial, @RequestParam("ffinal") String ffinal, @RequestParam("idCuenta") int idCuenta) {
+        return movimientoService.reporteJSON(finicial, ffinal, idCuenta);
     }
 
     @GetMapping("/generatePDFReport")
-    public String generatePDFReport(@RequestParam("finicial") String finicial, @RequestParam("ffinal") String ffinal) throws JsonProcessingException {
+    public String generatePDFReport(@RequestParam("finicial") String finicial, @RequestParam("ffinal") String ffinal, @RequestParam("idCuenta") int idCuenta) throws JsonProcessingException {
         String result = "{\"base\":\"data\"}";
-        String data = result.replace("data", movimientoService.reportePDF(finicial, ffinal));
+        String data = result.replace("data", movimientoService.reportePDF(finicial, ffinal, idCuenta));
         return data;
     }
 }

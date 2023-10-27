@@ -54,9 +54,16 @@ public class CuentaServiceImpl implements CuentaService {
             Cuenta cuenta = findObjectById(id);
             repository.delete(cuenta);
         }catch (Exception e){
-            throw new UnprocessableEntityException("Para eliminar una cuenta, no debe tener movimientos!");
+            throw new UnprocessableEntityException("La cuenta tiene varios movimientos, no se puede eliminar.!");
         }
 
+    }
+
+    @Override
+    public List<CuentaDTO> getCuentasByCliente(int idCLiente) {
+        List<Cuenta> cuentas = repository.getCuentasByCliente(idCLiente);
+        return cuentas.stream().map(cuenta -> modelMapper.map(cuenta, CuentaDTO.class))
+                .collect(Collectors.toList());
     }
 
     @Override
